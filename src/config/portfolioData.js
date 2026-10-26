@@ -11,7 +11,7 @@ export const CONFIG = {
   nome: 'Emerson Santos',
   nomeContato: { nome: 'Emerson', sobrenome: 'Santos' },
   assinatura: 'emerson.dev',
-  titulo: 'Estudante de Desenvolvimento Full Stack • UI/UX & Automações',
+  titulo: 'Estudante de Desenvolvimento Full Stack',
   bio: 'Transformando ideias e aprendizados em soluções digitais completas — da interface intuitiva à lógica e automação que fazem tudo funcionar.',
   localizacao: 'Maceió, AL',
   iniciais: 'ES',
