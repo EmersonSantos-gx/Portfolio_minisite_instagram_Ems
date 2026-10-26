@@ -25,7 +25,7 @@ export const CONFIG = {
   cnpj: '67.069.614/0001-09',
   ano: 2026,
   redes: {
-    instagram: 'https://instagram.com/gxcodev.space',
+    instagram: 'https://instagram.com/emssantos_',
     linkedin: 'https://linkedin.com/in/emsantosdev',
     github: 'https://github.com/EmersonSantos-gx',
   },
@@ -37,7 +37,7 @@ export const CONFIG = {
   servicos: [
     'Mini Site - Link-in-Bio',
     'Landing Page de Alta Conversão',
-    'Sistema / Dashboard',
+    'Dashboard',
     'Design Grafíco (Corel Draw)',
     'UI/UX Design / Protótipo Figma',
     'ChatBot / Automação WhatsApp',
