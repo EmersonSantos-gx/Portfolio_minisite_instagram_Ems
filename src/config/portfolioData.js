@@ -10,7 +10,7 @@ export const PROFILE_PHOTO_BASE64 = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA
 export const CONFIG = {
   nome: 'Emerson Santos',
   nomeContato: { nome: 'Emerson', sobrenome: 'Santos' },
-  assinatura: 'emerson.dev',
+  assinatura: 'ems_gx',
   titulo: 'Estudante de Desenvolvimento Full Stack',
   bio: 'Transformando ideias e aprendizados em soluções digitais completas — da interface intuitiva à lógica e automação que fazem tudo funcionar.',
   localizacao: 'Maceió, AL',
