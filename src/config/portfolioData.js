@@ -18,7 +18,7 @@ export const CONFIG = {
   fotoPerfil: '/perfil.jpg',
   fotoPerfilFallback: PROFILE_PHOTO_BASE64,
   whatsapp: '5582981467042',
-  instagramHandle: '@emssantos_',
+  instagramHandle: 'gxcodev.space',
   siteUrl: '',
   gxcodevUrl: '',
   empresa: 'Gxcodev',
