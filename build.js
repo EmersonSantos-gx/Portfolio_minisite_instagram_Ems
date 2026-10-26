@@ -78,7 +78,7 @@ const indexHtml = `<!DOCTYPE html>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#050B16">
   <meta name="color-scheme" content="dark">
-  <title>Emerson Santos — Arte, código & solução</title>
+  <title>Emerson Santos — Design, código & Edições</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
