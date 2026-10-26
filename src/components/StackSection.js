@@ -46,7 +46,7 @@ export default function StackSection() {
                 ))}
               </div>
               <p className="learning-line">
-                Aprendizado contínuo • aplicação prática
+                Em Aprendizado contínuo • aplicação prática
               </p>
             </div>
           </details>
