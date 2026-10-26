@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "echo 'Skip binary install'",
+  "buildCommand": "node build.js",
+  "outputDirectory": "dist"
+}
