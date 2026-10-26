@@ -33,7 +33,7 @@ function ProjectArtwork({ type }) {
             </span>
             <span className="mini-pill">Este mês ↗</span>
           </div>
-          {renderStats(['R$ 4.850', 'R$ 2.340', '+18%'], ['Receitas', 'Despesas', 'Saldo'])}
+          {renderStats(['R$ 4.850', 'R$ 2.340', '+20%'], ['Receitas', 'Despesas', 'Saldo'])}
           <div className="mini-chart">
             {[35, 60, 42, 79, 55, 92, 74, 100].map((height, idx) => (
               <span key={idx} style={{ height: `${height}%` }} />

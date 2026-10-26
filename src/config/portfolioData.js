@@ -14,7 +14,7 @@ export const CONFIG = {
   titulo: 'Estudante de Desenvolvimento Full Stack • UI/UX & Automações',
   bio: 'Transformando ideias e aprendizados em soluções digitais completas — da interface intuitiva à lógica e automação que fazem tudo funcionar.',
   localizacao: 'Maceió, AL',
-  iniciais: 'ES',
+  iniciais: 'ES_GX',
   fotoPerfil: '/perfil.jpg',
   fotoPerfilFallback: PROFILE_PHOTO_BASE64,
   whatsapp: '5582981467042',
