@@ -3,22 +3,1680 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#050B16">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Emerson Santos — Desenvolvedor Full Stack, UI/UX e Automações. Conheça minha trajetória, projetos e o estúdio digital Gxcodev. Maceió, AL • Todo o Brasil.">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Emerson Santos | Arte, código & solução">
-  <meta property="og:description" content="Desenvolvimento Full Stack, UI/UX e automações. Vamos dar forma à sua próxima ideia?">
   <title>Emerson Santos — Arte, código & solução</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050b16'/%3E%3Cpath d='m25 20-13 12 13 12m14-24 13 12-13 12' fill='none' stroke='%230ea5e9' stroke-width='5'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>/* ================================================================
+       00. TOKENS / BASE — paleta arte + código, com fallback de fontes
+       ================================================================ */
+    :root{--bg:#050B16;--surface:rgba(15,27,46,.72);--cyan:#0EA5E9;--sky:#38BDF8;--clay:#D97736;--peach:#F4A261;--text:#F0F6FC;--muted:#94A3B8;--line:rgba(14,165,233,.22);--mono:'Space Mono',monospace;--sans:'Space Grotesk',sans-serif}
+    *,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;color:var(--text);background:var(--bg);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-tap-highlight-color:transparent;overflow-x:hidden}button,input,select,textarea{font:inherit}button,a,input,select,textarea{touch-action:manipulation}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:wait;opacity:.6}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{color:inherit}h1,h2,h3,p{margin:0}button,input,select,textarea{border-radius:0}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--peach);outline-offset:5px}::selection{background:#0ea5e955;color:white}button{border:0}svg{flex-shrink:0}i{font-style:normal}dialog{color:var(--text)}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.mono{font-family:var(--mono)}.muted{color:var(--muted)}.sky{color:var(--sky)}.peach{color:var(--peach)}.small{font-size:12px}.skip-link{position:fixed;left:16px;top:-100px;z-index:200;background:var(--cyan);padding:12px 20px;border-radius:12px}.skip-link:focus{top:16px}.container{max-width:460px;margin-inline:auto;padding-inline:16px}.icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}.icon svg{width:100%;height:100%}.press{transition:transform .2s,box-shadow .2s,background .2s,border-color .2s}.press:active{transform:translate(3px,3px)!important;box-shadow:none!important}.glass{background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}.glass:hover{border-color:rgba(56,189,248,.48)}
+
+    /* 01. BACKDROP — grid, code fragments, partículas leves (sem canvas) */
+    .ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at 15% 18%,#d9773615,transparent 42%),radial-gradient(ellipse at 90% 45%,#0ea5e915,transparent 48%),linear-gradient(140deg,#050B16,#0A1428)}
+    .ambient::before{content:'';position:absolute;inset:0;background-image:linear-gradient(#38bdf808 1px,transparent 1px),linear-gradient(90deg,#38bdf808 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse,black 20%,transparent 80%)}
+    .particle{position:absolute;width:3px;height:3px;background:var(--sky);border-radius:50%;box-shadow:0 0 10px #38bdf890;animation:float-particle 13s ease-in-out infinite alternate}.particle:nth-child(2n){background:var(--peach);animation-duration:18s}.ambient-code{display:none;position:absolute;color:#77a7cc29;white-space:pre;font:12px/2.2 var(--mono);transform:rotate(-7deg);user-select:none}.ambient-code.left{top:18%;right:calc(50% + 280px)}.ambient-code.right{top:48%;left:calc(50% + 280px);transform:rotate(5deg)}.desktop-note{display:none;position:fixed;bottom:38px;font:10px var(--mono);letter-spacing:2px;color:#6886a9}.desktop-note.left{left:38px}.desktop-note.right{right:38px}.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--clay),var(--cyan));width:0;z-index:100}
+    .portfolio{position:relative;width:100%;max-width:460px;margin:auto;background:linear-gradient(165deg,rgba(10,20,40,.92),rgba(5,11,22,.98) 28%);overflow:hidden;min-height:100svh}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:max(22px,env(safe-area-inset-top));padding-bottom:22px}.signature{font-size:12px;font-weight:700;letter-spacing:-.5px}.signature span{color:var(--sky)}.availability{display:inline-flex;align-items:center;gap:6px;font:8px var(--mono);letter-spacing:.45px;color:#b5e6d3;white-space:nowrap}.status-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#54dcb0;box-shadow:0 0 0 3px #54dcb012;animation:status-pulse 2.5s ease-in-out infinite}
+
+    /* 02. HERO / AVATAR — o gradiente gira sem girar a foto */
+    .hero{position:relative;text-align:center;padding-top:10px}.hero::before{content:'';position:absolute;inset:0 -16px auto;height:250px;background:radial-gradient(ellipse at 18% 30%,#d9773628,transparent 57%),radial-gradient(ellipse at 85% 35%,#0ea5e929,transparent 52%);pointer-events:none}.hero-art{position:absolute;top:27px;left:14px;width:70px;height:80px;opacity:.33;transform:rotate(-16deg);background:repeating-linear-gradient(0deg,transparent 0 8px,#d97736 9px 11px,transparent 13px 18px);border-radius:60% 20% 50% 30%;mask-image:linear-gradient(90deg,transparent,black,transparent)}.hero-code{position:absolute;top:42px;right:0;color:#38bdf86e;font:9px/1.8 var(--mono);text-align:left;transform:rotate(5deg);pointer-events:none}.avatar-wrap{position:relative;width:128px;height:128px;margin:0 auto 21px}.story-ring{width:128px;height:128px;position:relative;padding:4px;border-radius:50%;isolation:isolate;box-shadow:0 0 35px #0ea5e924;animation:ring-glow 5s ease-in-out infinite}.story-ring::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(#F58529,#DD2A7B,#8134AF,#0EA5E9,#F4A261,#F58529);animation:spin 10s linear infinite;z-index:-1}.avatar-inner{position:relative;width:120px;height:120px;border:5px solid var(--bg);background:#111f31;border-radius:50%;overflow:hidden}.avatar-inner img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.avatar-fallback{position:absolute;inset:0;background:linear-gradient(105deg,#793c28 0%,#b46e3c 38%,#192d42 51%,#061b2d 100%);display:grid;place-items:center;isolation:isolate}.avatar-fallback::before{content:'{ }\A  const\A  </>';white-space:pre;position:absolute;right:-2px;top:8px;font:12px/2 var(--mono);color:#38bdf850;transform:rotate(-7deg)}.avatar-fallback::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(165deg,transparent 0 9px,#ffdeaa16 10px 12px,transparent 14px 21px);mask-image:linear-gradient(90deg,black,transparent 65%)}.avatar-fallback span{z-index:1;font-size:43px;font-weight:700;letter-spacing:-5px;color:#f5f0e3;text-shadow:2px 3px 0 #050b1660}.verified{position:absolute;right:0;bottom:4px;width:29px;height:29px;display:grid;place-items:center;background:var(--cyan);border:4px solid var(--bg);border-radius:50%;color:white;z-index:2;font-size:11px}.eyebrow{font:9px var(--mono);letter-spacing:2.1px;text-transform:uppercase;color:var(--peach);margin-bottom:8px}.hero h1{font-size:38px;letter-spacing:-1.9px;line-height:1.15;font-weight:700}.hero h1 span{color:var(--sky)}.hero-role{font-size:13px;color:#c9d6e5;margin-top:12px}.code-tag{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:17px;padding:8px 10px;background:#050b167a;border:1px solid #6c85a822;border-radius:7px;font:9px/1.7 var(--mono)}.code-tag .keyword{color:var(--sky)}.code-tag .string{color:var(--peach)}.hero-bio{max-width:365px;margin:17px auto 0;color:var(--muted);font-size:14px;line-height:1.75}.location{display:flex;align-items:center;justify-content:center;gap:6px;color:#aabacd;margin-top:15px;font-size:11px}.location .icon{width:13px;height:13px;color:var(--peach)}.location .separator{color:#40516a;padding:0 3px}.social-bar{display:flex;justify-content:center;gap:12px;margin-top:23px}.social-link{width:47px;height:47px;border-radius:13px;display:grid;place-items:center;position:relative;font-size:19px;background:#0f1b2ec0;border:1px solid var(--line);box-shadow:3px 3px 0 #02070e}.social-link:hover{transform:translateY(-4px);color:var(--sky);border-color:var(--sky);box-shadow:0 5px 22px #0ea5e918}.tooltip{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%);font:9px var(--mono);padding:5px 8px;white-space:nowrap;background:#203044;border:1px solid var(--line);border-radius:5px;opacity:0;pointer-events:none;transition:opacity .2s}.social-link:hover .tooltip,.social-link:focus-visible .tooltip{opacity:1}.hero-cta{margin-top:23px;width:100%}.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:47px;padding:12px 16px;border-radius:11px;font-size:13px;font-weight:700;line-height:1.35;text-align:center}.button-primary{background:var(--cyan);color:#02111c;box-shadow:3px 3px 0 #044369;border:1px solid #54c9ff55}.button-primary:hover{background:#38bdf8;box-shadow:3px 3px 0 #06608c,0 0 24px #0ea5e91f}.button-secondary{background:#112037;border:1px solid #26425c;color:#d5e5f3;box-shadow:3px 3px 0 #02070e}.button-secondary:hover{border-color:var(--cyan);background:#142a42}.button-quiet{color:#b8c9dd;border:1px solid #26394e;background:#0a1626}.button-quiet:hover{color:var(--text);border-color:#51708d}.full{width:100%}.section-nav{display:flex;margin:26px 0 0;border-top:1px solid #20334a;border-bottom:1px solid #20334a}.section-nav a{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;min-height:46px;color:#9eafc4;font:10px var(--mono)}.section-nav a span{color:var(--sky);font-size:9px}.section-nav a:hover{color:white;background:#0ea5e908}.section-nav a+a{border-left:1px solid #20334a}
+
+    /* 03. SKILLS — accordions nativos: acessíveis mesmo sem JS */
+    .section{padding-top:38px;scroll-margin-top:22px}.section-heading{display:flex;align-items:center;gap:11px;font:9px var(--mono);letter-spacing:1.4px;color:var(--sky);margin-bottom:11px}.section-heading::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#0ea5e938,transparent)}.section h2{font-size:25px;line-height:1.25;letter-spacing:-.9px;font-weight:600}.section-intro{font-size:12px;line-height:1.7;color:var(--muted);margin-top:10px}.skill-list{display:grid;gap:10px;margin-top:21px}.skill-card{border-radius:13px;overflow:hidden}.skill-card summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:11px;padding:15px;min-height:76px}.skill-card summary::-webkit-details-marker{display:none}.skill-symbol{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#0ea5e912;color:var(--sky);border:1px solid #0ea5e926;font-size:16px;flex-shrink:0}.skill-card:nth-child(even) .skill-symbol{color:var(--peach);background:#d9773610;border-color:#d9773628}.skill-summary{flex:1;min-width:0}.skill-summary h3{font-size:13px;font-weight:600;letter-spacing:-.1px}.skill-summary p{font:8px/1.5 var(--mono);color:#9cadc4;margin-top:4px}.skill-chevron{color:#7c93ad;font-size:10px;transition:transform .25s}.skill-card[open] .skill-chevron{transform:rotate(180deg)}.skill-body{padding:0 15px 17px}.skill-body>p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:13px}.tech-tags{display:flex;flex-wrap:wrap;gap:6px}.tech-tag{font:9px/1.6 var(--mono);padding:5px 7px;background:#081323;border:1px solid #1f354d;border-radius:5px;color:#c5d6e8}.tech-tag i{color:var(--sky);margin-right:5px}.learning-line{margin-top:16px;display:flex;align-items:center;gap:10px;font:8px var(--mono);color:#91a8c0}.learning-line::before{content:'';width:42px;height:3px;border-radius:4px;background:linear-gradient(90deg,var(--clay),var(--cyan))}
+
+    /* 04. PORTFÓLIO — filtros e previews CSS substituíveis por imagens */
+    .project-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}.project-count{font:9px var(--mono);color:#8da4bf;white-space:nowrap}.filters{display:flex;gap:7px;margin:20px 0 17px;flex-wrap:wrap}.filter{font:9px var(--mono);min-height:36px;padding:8px 11px;border:1px solid #25364b;border-radius:7px;background:#0b1728;color:#9bb0c8;transition:background .2s,border-color .2s,color .2s}.filter[aria-pressed="true"]{color:#6dd0fd;background:#0ea5e917;border-color:#0ea5e966}.filter:hover{border-color:var(--sky);color:white}.project-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}.project-card{border-radius:14px;overflow:hidden;position:relative;animation:card-enter .35s ease both}.project-card:hover{box-shadow:0 8px 28px #0003}.project-preview{position:relative;background:#0a1728;overflow:hidden}.window-bar{height:25px;padding:0 10px;display:flex;align-items:center;gap:4px;border-bottom:1px solid #ffffff08;background:#091322;color:#7891aa}.window-dot{width:5px;height:5px;border-radius:50%;background:#ec715f}.window-dot:nth-child(2){background:#e9b95b}.window-dot:nth-child(3){background:#6fb99a}.window-label{font:7px var(--mono);margin-left:6px;opacity:.85}.preview-stage{position:relative;aspect-ratio:16/9;isolation:isolate;background:radial-gradient(ellipse at 80% 30%,#0ea5e918,transparent 65%),#0c1a2b}.preview-stage>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}.concept-mark{position:absolute;z-index:3;right:8px;bottom:7px;background:#06101bd9;border:1px solid #ffffff20;border-radius:4px;padding:3px 5px;color:#b9cadd;font:6px var(--mono);letter-spacing:.5px}.project-body{padding:17px}.stack-badge{font:8px/1.7 var(--mono);color:var(--sky);display:block;margin-bottom:8px}.project-title{font-size:19px;font-weight:600;line-height:1.25;letter-spacing:-.5px}.project-description{font-size:12px;line-height:1.65;color:var(--muted);margin-top:9px}.project-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:17px}.project-actions .button{font-size:10px;min-height:39px;padding:10px}.project-actions .button-secondary{box-shadow:2px 2px 0 #02070e}.detail-button{min-width:42px;padding:8px 10px;color:#c1d4e9;border:1px solid #30415a;border-radius:8px;background:#102036;font-size:10px}.detail-button:hover{color:var(--sky);border-color:var(--cyan)}.project-note{display:flex;gap:6px;align-items:center;color:#879bb4;font:8px/1.7 var(--mono);margin-top:13px}.project-note .icon{width:12px;height:12px}
+    /* Previews vetoriais em HTML/CSS: nenhum arquivo de imagem obrigatório. */
+    .mini-ui{position:absolute;inset:15px 18px;box-shadow:0 10px 30px #0004;display:grid;grid-template-columns:30px 1fr;border:1px solid #ffffff14;border-radius:5px;overflow:hidden;background:#101f30}.mini-sidebar{background:#081422;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:11px}.mini-logo{width:13px;height:13px;border-radius:4px;background:#0ea5e9;display:grid;place-items:center;color:#05111b;font:bold 9px var(--sans)}.mini-sidebar>b{display:block;width:10px;height:3px;background:#4d6886;border-radius:2px}.mini-content{padding:12px;min-width:0}.mini-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}.mini-title{font-size:9px;font-weight:700;color:#eaf4fe}.mini-pill{font:5px var(--mono);padding:3px 5px;color:#72d2ff;background:#0ea5e916;border-radius:3px}.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.mini-stat{border:1px solid #ffffff0b;border-radius:4px;background:#ffffff03;padding:6px}.mini-stat small{font:5px var(--mono);color:#91a4bb;display:block}.mini-stat strong{display:block;font-size:11px;font-weight:600;margin-top:3px}.mini-lines{display:grid;gap:6px;margin-top:11px}.mini-row{display:flex;align-items:center;gap:5px;border-bottom:1px solid #ffffff08;padding-bottom:4px}.mini-avatar{width:9px;height:9px;border-radius:50%;background:#d97736}.mini-row>b{height:3px;border-radius:3px;background:#7692ad45;flex:1}.mini-row>em{width:23px;height:6px;border-radius:2px;background:#0ea5e928}.mini-chart{display:flex;align-items:flex-end;height:57px;gap:6px;margin-top:10px;border-bottom:1px solid #ffffff19;background:repeating-linear-gradient(0deg,transparent 0 17px,#ffffff07 18px 19px)}.mini-chart span{flex:1;border-radius:2px 2px 0 0;background:linear-gradient(#38bdf8,#0ea5e929)}.mini-chart span:nth-child(2n){background:linear-gradient(#f4a261,#d9773626)}.mini-chart-labels{display:flex;justify-content:space-between;font:5px var(--mono);color:#899db5;margin-top:5px}.mini-finance .mini-logo{background:var(--peach)}.mini-finance .mini-stat strong{color:#cdeaf4}.mini-studio{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 30% 40%,#d9773626,transparent 55%),radial-gradient(ellipse at 80% 80%,#0ea5e926,transparent 55%)}.mini-phone{width:88px;padding:10px 8px;border:2px solid #4e677f;border-radius:13px;background:#081322;transform:rotate(-8deg);box-shadow:8px 12px 0 #0003;text-align:center}.mini-phone-logo{margin:auto auto 5px;width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--cyan);border-radius:50%;font-size:8px;font-weight:bold;color:var(--sky)}.mini-phone h4{font-size:9px;margin:0 0 3px}.mini-phone small{font:4px var(--mono);color:#a9bad0;display:block}.mini-phone a{display:block;background:#16304b;border:1px solid #0ea5e936;font-size:4px;padding:5px;margin-top:5px;border-radius:3px}.mini-annotations{margin-left:18px;font:9px/2.2 var(--mono);color:#9aaec6}.mini-annotations span{color:var(--peach);display:block;font-size:6px;letter-spacing:1px}.mini-bot{position:absolute;inset:0;padding:18px 28px;background:radial-gradient(ellipse at 50% 65%,#0ea5e911,transparent 75%)}.mini-bot-head{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:600;margin-bottom:12px}.mini-bot-head>b{width:22px;height:22px;display:grid;place-items:center;color:#6ad3ae;background:#1b795f27;border:1px solid #6ad3ae33;border-radius:7px}.mini-message{font:7px/1.6 var(--sans);background:#1b3149;border:1px solid #ffffff09;border-radius:6px 6px 6px 0;padding:7px 9px;max-width:85%;margin-bottom:7px;color:#c5d7e7}.mini-message.reply{margin-left:auto;border-radius:6px 6px 0 6px;background:#14463d;color:#9ee5c7}.mini-flow{display:flex;align-items:center;gap:6px;font:6px var(--mono);color:#83c8f0;margin-top:10px}.mini-flow span{padding:4px 5px;border:1px solid #0ea5e933;border-radius:3px}
+
+    /* 05. GXCODEV — destaque com gradiente, brilho e briefing */
+    .studio-section{padding-top:35px}.studio-frame{position:relative;isolation:isolate;border-radius:19px;padding:1px;overflow:hidden;background:#14354e}.studio-frame::before{content:'';position:absolute;inset:-55%;z-index:-1;background:conic-gradient(from 90deg,#0EA5E9,#1a3147,#D97736,#3f302b,#0EA5E9);animation:spin 16s linear infinite}.studio-card{position:relative;border-radius:18px;background:linear-gradient(135deg,#0d2034,#0a1424 70%);padding:24px 21px;overflow:hidden}.studio-card::after{content:'';position:absolute;width:75px;height:150%;top:-30%;left:-60%;transform:rotate(30deg);background:linear-gradient(90deg,transparent,#ffffff05,transparent);animation:shine 10s ease-in-out infinite;pointer-events:none}.studio-grid{position:absolute;inset:0;background-image:linear-gradient(#38bdf806 1px,transparent 1px),linear-gradient(90deg,#38bdf806 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(150deg,black,transparent 70%);pointer-events:none}.studio-badge{position:relative;display:inline-flex;gap:6px;align-items:center;color:var(--peach);font:8px var(--mono);letter-spacing:1.2px;padding:5px 8px;border:1px solid #d9773639;background:#d977360c;border-radius:5px}.studio-brand{display:flex;align-items:center;justify-content:space-between;margin-top:23px}.studio-wordmark{font-size:40px;letter-spacing:-2.6px;font-weight:700;line-height:1}.studio-wordmark span{color:var(--sky)}.studio-logo{font-family:var(--mono);font-size:25px;color:#38bdf85e;transform:rotate(-12deg)}.studio-motto{font-size:16px;line-height:1.55;letter-spacing:-.3px;margin-top:13px;max-width:280px}.studio-motto span{color:var(--peach)}.brand-meaning{font:8px/1.9 var(--mono);color:#a3b6cb;margin-top:12px;padding-bottom:20px;border-bottom:1px solid #1f354d}.brand-meaning strong{color:#e5effa;font-weight:400}.studio-pillars{display:grid;gap:18px;margin:22px 0}.pillar{display:flex;gap:12px}.pillar-icon{width:31px;height:31px;border:1px solid #38bdf82d;background:#0ea5e90c;border-radius:8px;display:grid;place-items:center;color:var(--sky);flex-shrink:0;font-size:12px}.pillar:nth-child(2) .pillar-icon{color:var(--peach);background:#d977360c;border-color:#d977362d}.pillar h3{font-size:12px;font-weight:600;line-height:1.5}.pillar p{font-size:11px;line-height:1.7;color:var(--muted);margin-top:4px}.studio-cta{font-size:11px;padding-inline:10px;position:relative;z-index:1}.studio-whatsapp{margin-top:10px;font-size:11px;position:relative;z-index:1}.studio-instagram{display:flex;justify-content:center;align-items:center;gap:6px;margin:16px auto 0;font:9px var(--mono);color:#aec0d5;position:relative;z-index:1}.studio-instagram:hover{color:var(--sky)}
+
+    /* 06. FOOTER / FAB / TOAST */
+    .footer{padding:31px 0 34px;text-align:center}.footer-top{display:flex;align-items:center;justify-content:center;gap:8px;font:9px var(--mono);color:#9cb3cb;margin-bottom:21px}.footer-top::before,.footer-top::after{content:'';width:25px;height:1px;background:#284057}.footer-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.footer-actions .button{min-height:43px;font-size:10px;padding:11px 8px;gap:7px}.footer-actions .icon{width:13px;height:13px}.footer-signature{font-size:10px;color:#9bacc0;line-height:1.9;margin-top:22px}.footer-signature strong{font-weight:500;color:#d3e1ef}.footer-cnpj{font:8px/1.8 var(--mono);color:#8095ad;margin-top:3px}.back-top{display:inline-flex;align-items:center;gap:6px;font:8px var(--mono);color:var(--sky);margin-top:17px;min-height:32px}.fab{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:20px;z-index:50;width:53px;height:53px;border-radius:17px;display:grid;place-items:center;font-size:25px;color:#d6fff0;background:#123e35;border:1px solid #57caa278;box-shadow:3px 3px 0 #021611,0 0 25px #2bd3a018;animation:fab-glow 4s ease-in-out infinite}.fab:hover{background:#195347;transform:translateY(-3px)}.fab .tooltip{bottom:calc(100% + 10px);left:auto;right:0;transform:none}.fab:hover .tooltip,.fab:focus-visible .tooltip{opacity:1}.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom));z-index:150;transform:translate(-50%,15px);opacity:0;pointer-events:none;display:flex;gap:8px;align-items:center;border-radius:11px;padding:12px 17px;background:#152c3f;border:1px solid #3c6685;box-shadow:0 8px 30px #0006;color:#ecf6ff;max-width:calc(100% - 40px);width:max-content;font-size:12px;transition:opacity .2s,transform .2s}.toast.visible{opacity:1;transform:translate(-50%,0)}.toast .icon{color:#6bd5b0}.toast[role="status"]{text-align:left}
+
+    /* 07. MODAIS — dialog nativo + fallback, teclado e safe areas */
+    .modal{padding:0;border:1px solid #2a4a63;background:#0b1728;border-radius:20px;width:calc(100% - 32px);max-width:428px;max-height:calc(100dvh - 40px);margin:auto;box-shadow:0 24px 100px #0009;overflow:auto;overscroll-behavior:contain}.modal::backdrop{background:#020713cf;backdrop-filter:blur(7px)}.modal.fallback-open{display:block;position:fixed;inset:0;z-index:120;box-shadow:0 0 0 100vmax #020713e8}.modal-inner{padding:24px}.modal-header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:20px}.modal-eyebrow{font:8px var(--mono);letter-spacing:1.3px;color:var(--sky);margin-bottom:8px}.modal h2{font-size:25px;line-height:1.2;letter-spacing:-.8px}.close-modal{min-width:36px;min-height:36px;border:1px solid #2c4159;border-radius:10px;background:#13253a;display:grid;place-items:center;color:#c7d8e9}.modal-text{font-size:13px;line-height:1.75;color:var(--muted);margin-top:15px}.modal-preview{border:1px solid #27405b;border-radius:11px;overflow:hidden}.modal-stack{margin-top:15px}.modal-points{list-style:none;padding:0;margin:16px 0;display:grid;gap:10px}.modal-points li{display:flex;gap:8px;font-size:12px;line-height:1.7;color:#c5d6e8}.modal-points li .icon{color:var(--peach);width:14px;height:14px;margin-top:3px}.modal-disclaimer{font:9px/1.9 var(--mono);color:#9fb0c3;padding:12px;background:#ffffff04;border:1px solid #ffffff0e;border-radius:8px;margin-top:15px}.modal-actions{display:grid;gap:9px;margin-top:20px}.form-intro{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:19px}.form-field{display:grid;gap:7px;margin-top:15px}.form-field label,.services-label{font-size:12px;font-weight:500;color:#d5e2f0}.form-field input,.form-field select,.form-field textarea{width:100%;min-height:46px;padding:12px;color:var(--text);background:#071220;border:1px solid #2c425b;border-radius:9px;font-size:13px}.form-field textarea{min-height:88px;resize:vertical}.form-field input::placeholder,.form-field textarea::placeholder{color:#70869e}.form-field select{appearance:auto}.form-help{font-size:10px;color:#8ea3ba;line-height:1.7;margin-top:11px}.briefing-submit{margin-top:20px}.copy-link-field{width:100%;border:1px solid #2c425b;background:#071220;color:#d5e8fb;border-radius:9px;padding:12px;font:11px var(--mono);margin-top:17px}.form-required{color:var(--peach)}
+
+    /* 08. RESPONSIVIDADE / MOVIMENTO REDUZIDO */
+    @media(min-width:440px){.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.project-body{padding:13px}.project-title{font-size:15px;min-height:38px}.project-description{font-size:11px;min-height:73px}.project-actions{grid-template-columns:1fr;gap:7px}.project-actions .button,.detail-button{min-height:36px;font-size:9px}.detail-button{width:100%}.mini-ui{inset:9px;grid-template-columns:20px 1fr}.mini-content{padding:7px}.mini-title{font-size:6px}.mini-top{margin-bottom:7px}.mini-logo{width:10px;height:10px;font-size:7px}.mini-sidebar{gap:7px;padding-top:8px}.mini-sidebar>b{width:7px}.mini-stat{padding:4px}.mini-stat small{font-size:4px}.mini-stat strong{font-size:8px}.mini-lines{margin-top:7px;gap:4px}.mini-row{padding-bottom:3px}.mini-chart{height:34px;margin-top:6px;gap:4px}.mini-phone{width:62px;padding:7px 5px;border-radius:9px}.mini-phone-logo{width:17px;height:17px;font-size:6px}.mini-phone h4{font-size:6px}.mini-phone a{font-size:3px;padding:3px;margin-top:4px}.mini-phone small{font-size:3px}.mini-annotations{font-size:7px;margin-left:12px}.mini-annotations span{font-size:4px}.mini-bot{padding:11px 13px}.mini-bot-head{font-size:6px;margin-bottom:7px}.mini-bot-head>b{width:16px;height:16px}.mini-message{font-size:5px;padding:4px 6px;margin-bottom:4px}.mini-flow{font-size:4px;gap:4px;margin-top:7px}.mini-flow span{padding:3px}.concept-mark{font-size:5px;padding:2px 4px}}
+    @media(min-width:640px){body{padding:35px 0}.portfolio{border:1px solid #263e5766;border-radius:27px;box-shadow:0 30px 130px #0008,0 0 100px #0ea5e905;min-height:auto}.container{padding-inline:24px}.topbar{padding-top:24px}.hero{padding-top:13px}.hero-bio{font-size:13px}.hero-code{right:2px}.hero h1{font-size:38px}.section{padding-top:38px}.section h2{font-size:26px}.footer{padding-bottom:31px}.availability{font-size:7px}.project-title{font-size:15px}}
+    @media(min-width:1000px){.ambient-code,.desktop-note{display:block}.fab{right:calc(50% - 312px);bottom:30px}.ambient::before{background-size:56px 56px}}
+    @media(max-width:359px){.topbar{gap:5px}.signature{font-size:10px}.availability{font-size:6px;letter-spacing:.1px}.hero h1{font-size:32px}.hero-role{font-size:11px}.hero-code{font-size:7px;right:-8px}.hero-art{left:-7px;width:50px}.code-tag{font-size:8px;padding-inline:7px}.skill-card summary{padding:12px;gap:8px}.skill-summary h3{font-size:12px}.skill-summary p{font-size:7px}.studio-card{padding:22px 17px}.studio-wordmark{font-size:35px}.studio-cta{font-size:10px}.footer-actions .button{font-size:9px}.fab{width:48px;height:48px;right:14px}}
+    @keyframes spin{to{transform:rotate(360deg)}}@keyframes status-pulse{50%{box-shadow:0 0 0 4px #54dcb010,0 0 9px #54dcb045}}@keyframes ring-glow{50%{box-shadow:0 0 32px #d9773625,0 0 20px #0ea5e92b}}@keyframes float-particle{to{transform:translate3d(12px,-50px,0);opacity:.25}}@keyframes shine{0%,65%{left:-60%}95%,100%{left:140%}}@keyframes fab-glow{50%{box-shadow:3px 3px 0 #021611,0 0 27px #2bd3a02e}}@keyframes card-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.press:active{transform:none!important}}
+
+/* Suporte adicional para renderização declarativa em React */
+.modal.react-modal-open {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  margin: auto;
+}
+.modal-backdrop-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 119;
+  background: rgba(2, 7, 19, 0.82);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+</style>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/index.js"></script>
+  <script type="text/babel">
+/* Build Timestamp: 2026-10-26T22:25:53.062Z */
+
+const { useState, useEffect, useRef } = React;
+
+
+/* --- Arquivo: src/config/portfolioData.js --- */
+/* ============================================================================
+   CONFIG — EDITE SOMENTE ESTE ARQUIVO PARA PERSONALIZAR O CONTEÚDO
+   - fotoPerfil aponta para '/perfil.jpg' (em public/perfil.jpg)
+   - fotoPerfilFallback guarda a sua foto em Base64 para garantir exibição
+     imediata mesmo em previews online sem servidor de arquivos estáticos.
+   ============================================================================ */
+
+const PROFILE_PHOTO_BASE64 = 'data:image/jpeg;base64,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';
+
+const CONFIG = {
+  nome: 'Emerson Santos',
+  nomeContato: { nome: 'Emerson', sobrenome: 'Santos' },
+  assinatura: 'emerson.dev',
+  titulo: 'Estudante de Desenvolvimento Full Stack • UI/UX & Automações',
+  bio: 'Transformando ideias e aprendizados em soluções digitais completas — da interface intuitiva à lógica e automação que fazem tudo funcionar.',
+  localizacao: 'Maceió, AL',
+  iniciais: 'ES',
+  fotoPerfil: '/perfil.jpg',
+  fotoPerfilFallback: PROFILE_PHOTO_BASE64,
+  whatsapp: '5582981467042',
+  instagramHandle: '@emssantos_',
+  siteUrl: '',
+  gxcodevUrl: '',
+  empresa: 'Gxcodev',
+  cnpj: '67.069.614/0001-09',
+  ano: 2026,
+  redes: {
+    instagram: 'https://instagram.com/emssantos_',
+    linkedin: 'https://linkedin.com/in/emsantosdev',
+    github: 'https://github.com/EmersonSantos-gx',
+  },
+  mensagens: {
+    geral: 'Olá Emerson! Vi seu portfólio no Instagram e quero conversar.',
+    orcamento:
+      'Olá Emerson! Conheci a Gxcodev pelo seu portfólio e gostaria de solicitar um orçamento para meu projeto.',
+  },
+  servicos: [
+    'Mini Site - Link-in-Bio',
+    'Landing Page de Alta Conversão',
+    'Dashboard',
+    'Design Grafíco (Corel Draw)',
+    'UI/UX Design / Protótipo Figma',
+    'ChatBot / Automação WhatsApp',
+    'Templates / Modelos de Portfólio',
+    'Quero conversar sobre uma ideia',
+  ],
+  FILTROS: [
+    { id: 'todos', nome: 'Todos' },
+    { id: 'web', nome: 'Web & UI' },
+    { id: 'fullstack', nome: 'Full Stack' },
+    { id: 'automacao', nome: 'Automações' },
+  ],
+  SKILLS: [
+    {
+      titulo: 'Front-End & UI',
+      icone: 'fa-solid fa-code',
+      foco: 'FOCO PRÁTICO / INTERFACES',
+      descricao: 'Criação de interfaces responsivas, Mobile-First e componentes modernos.',
+      tecnologias: [
+        { nome: 'HTML5', icone: 'fa-brands fa-html5' },
+        { nome: 'CSS3', icone: 'fa-brands fa-css3-alt' },
+        { nome: 'JavaScript (ES6+)', icone: 'fa-brands fa-js' },
+        { nome: 'TypeScript' },
+        { nome: 'React', icone: 'fa-brands fa-react' },
+        { nome: 'Next.js' },
+        { nome: 'Tailwind CSS' },
+      ],
+    },
+    {
+      titulo: 'Back-End & Automações',
+      icone: 'fa-solid fa-terminal',
+      foco: 'APRENDIZADO / LÓGICA & INTEGRAÇÕES',
+      descricao: 'Lógica de negócio, integração de sistemas e scripts de produtividade.',
+      tecnologias: [
+        { nome: 'Node.js', icone: 'fa-brands fa-node-js' },
+        { nome: 'Express' },
+        { nome: 'Python', icone: 'fa-brands fa-python' },
+        { nome: 'APIs REST' },
+        { nome: 'Automações & Bots WhatsApp' },
+      ],
+    },
+    {
+      titulo: 'Banco de Dados & Cloud',
+      icone: 'fa-solid fa-database',
+      foco: 'APRENDIZADO / DADOS & DEPLOY',
+      descricao: 'Modelagem, persistência de dados, integração com serviços e deploy.',
+      tecnologias: [
+        { nome: 'PostgreSQL' },
+        { nome: 'MongoDB' },
+        { nome: 'Supabase' },
+        { nome: 'Integração Google Sheets / Cloud' },
+      ],
+    },
+    {
+      titulo: 'UI/UX, Versionamento & IA',
+      icone: 'fa-solid fa-bezier-curve',
+      foco: 'FOCO PRÁTICO / DESIGN & PROCESSO',
+      descricao:
+        'Do wireframe ao protótipo, com colaboração, versionamento e IA aplicada ao processo criativo.',
+      tecnologias: [
+        { nome: 'Git & GitHub', icone: 'fa-brands fa-git-alt' },
+        { nome: 'Figma (Wireframes & Protótipos)', icone: 'fa-brands fa-figma' },
+        { nome: 'VS Code' },
+        { nome: 'Engenharia de Prompt & IA Aplicada' },
+      ],
+    },
+  ],
+  PROJETOS: [
+    {
+      id: 'gestao-escalas',
+      categoria: 'fullstack',
+      titulo: 'HealthSync • Gestão de Escalas Mobile',
+      descricao: 'Em desenvolvimento: Organização de agendas, financeiro e notificações por WhatsApp.',
+      stack: 'React Native • JavaScript',
+      imagem: '/HealthSync.png',
+      githubUrl: 'https://github.com/EmersonSantos-gx/HealthSync',
+      demoUrl: '',
+      preview: 'escalas',
+      demonstrativo: false,
+      detalhes:
+        'Em desenvolvimento: App Mobile para simplificar a gestão de escalas e a leitura das agendas. Um conceito de como unir clareza visual e organização de dados em um mesmo fluxo.',
+      destaques: [
+        'Visão centralizada das escalas e agendas.',
+        'Organização visual de equipes e horários.',
+        'Estrutura pensada para integração com uma API.',
+      ],
+    },
+    {
+      id: 'Mini Site',
+      categoria: 'web',
+      titulo: 'Mini Site • Proteção Veicular',
+      descricao: 'Portfólio responsivo com foco em conversão, apresentação de serviços e contato rápido.',
+      stack: 'JavaScript • CSS • HTML5',
+      imagem: '/CelsonLNPRO.png',
+      githubUrl: 'https://github.com/EmersonSantos-gx/lnpro-celson',
+      demoUrl: '',
+      preview: 'financas',
+      demonstrativo: false,
+      detalhes:
+        'Exploração de UI para finanças pessoais, com hierarquia de informações e gráficos compactos. Os valores do preview são apenas dados visuais de exemplo.',
+      destaques: [
+        'Dominio Personalizado',
+        'Desenvolvido com alta conversão Designer UI/UX.',
+        'Atende às necessidades do cliente.',
+      ],
+    },
+    {
+      id: 'cartao-digital',
+      categoria: 'web',
+      titulo: 'Cartão Digital Gxcodev',
+      descricao: 'Uma presença digital compacta que aproxima serviços, portfólio e contato.',
+      stack: 'HTML • Tailwind • JS',
+      imagem: '/projeto-3.png',
+      githubUrl: 'https://github.com/GxCodev',
+      demoUrl: '',
+      preview: 'studio',
+      demonstrativo: true,
+      detalhes:
+        'Conceito de Link-in-Bio com foco em navegação mobile, apresentação de serviços e caminhos curtos para uma conversa. Design e interação em uma experiência compacta.',
+      destaques: [
+        'Experiência Mobile-First.',
+        'CTAs claros e identidade visual consistente.',
+        'Galeria de trabalhos e contato rápido.',
+      ],
+    },
+    {
+      id: 'fluxobot',
+      categoria: 'automacao',
+      titulo: 'FluxoBot • Automações',
+      descricao: 'Estudo de um fluxo para organizar solicitações e encaminhar demandas.',
+      stack: 'Python • Automação',
+      imagem: '/projeto-4.png',
+      githubUrl: 'https://github.com/GxCodev',
+      demoUrl: '',
+      preview: 'bot',
+      demonstrativo: true,
+      detalhes:
+        'Estudo de fluxo de atendimento para receber, classificar e encaminhar solicitações. O preview representa a ideia visual do processo; nenhuma integração é executada por esta página.',
+      destaques: [
+        'Mapeamento de etapas do atendimento.',
+        'Conceito de classificação de solicitações.',
+        'Mensagens claras para acompanhamento.',
+      ],
+    },
+  ],
+};
+
+
+/* --- Arquivo: src/utils/helpers.js --- */
+function safeURL(value) {
+  try {
+    const url = new URL(value);
+    return ['https:', 'http:'].includes(url.protocol) ? url.href : '';
+  } catch {
+    return '';
+  }
+}
+
+function whatsappURL(message = CONFIG.mensagens.geral) {
+  return `https://wa.me/${String(CONFIG.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent(
+    message
+  )}`;
+}
+
+function publicPortfolioURL() {
+  const configured = safeURL(CONFIG.siteUrl);
+  if (configured) return configured;
+  if (typeof window !== 'undefined' && ['https:', 'http:'].includes(window.location.protocol)) {
+    return window.location.href.split('#')[0];
+  }
+  return '';
+}
+
+function vcardEscape(value) {
+  return String(value ?? '')
+    .replace(/\\/g, '\\\\')
+    .replace(/\r?\n/g, '\\n')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,');
+}
+
+function foldVCardLine(line) {
+  const encoder = new TextEncoder();
+  const chunks = [];
+  let current = '';
+  let length = 0;
+
+  for (const character of line) {
+    const size = encoder.encode(character).length;
+    if (length + size > 75) {
+      chunks.push(current);
+      current = ' ';
+      length = 1;
+    }
+    current += character;
+    length += size;
+  }
+  chunks.push(current);
+  return chunks.join('\r\n');
+}
+
+function buildVCard() {
+  const lines = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    `N:${vcardEscape(CONFIG.nomeContato.sobrenome)};${vcardEscape(CONFIG.nomeContato.nome)};;;`,
+    `FN:${vcardEscape(CONFIG.nome)}`,
+    `ORG:${vcardEscape(CONFIG.empresa)}`,
+    `TITLE:${vcardEscape(CONFIG.titulo)}`,
+    `TEL;TYPE=CELL:+${String(CONFIG.whatsapp).replace(/\D/g, '')}`,
+    `URL:${publicPortfolioURL() || safeURL(CONFIG.redes.github)}`,
+    `NOTE:${vcardEscape(
+      `WhatsApp: ${whatsappURL()}\nInstagram: ${CONFIG.redes.instagram}\nLinkedIn: ${CONFIG.redes.linkedin}\n${CONFIG.localizacao} — Todo o Brasil`
+    )}`,
+    'END:VCARD',
+  ];
+  return lines.map(foldVCardLine).join('\r\n') + '\r\n';
+}
+
+function downloadVCardFile() {
+  const blob = new Blob([buildVCard()], { type: 'text/vcard;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${CONFIG.nome
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')}.vcf`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+
+function manualCopyText(text) {
+  const input = document.createElement('textarea');
+  input.value = text;
+  input.setAttribute('readonly', '');
+  input.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, text.length);
+  let copied = false;
+  try {
+    copied = document.execCommand('copy');
+  } catch {
+    copied = false;
+  }
+  input.remove();
+  return copied;
+}
+
+
+/* --- Arquivo: src/components/AmbientBackground.js --- */
+function AmbientBackground() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    let scheduled = false;
+
+    const updateProgress = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const current = total > 0 ? Math.min(100, Math.max(0, (window.scrollY / total) * 100)) : 0;
+      setProgress(current);
+      scheduled = false;
+    };
+
+    const onScrollOrResize = () => {
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(updateProgress);
+      }
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <a className="skip-link" href="#conteudo">
+        Pular para o conteúdo
+      </a>
+
+      <div
+        className="scroll-progress"
+        style={{ width: `${progress}%` }}
+        aria-hidden="true"
+      />
+
+      <div className="ambient" aria-hidden="true">
+        <span className="particle" style={{ left: '9%', top: '16%' }} />
+        <span className="particle" style={{ left: '22%', top: '69%' }} />
+        <span className="particle" style={{ left: '82%', top: '23%' }} />
+        <span className="particle" style={{ left: '91%', top: '76%' }} />
+        <span className="particle" style={{ left: '15%', top: '44%' }} />
+        <span className="particle" style={{ left: '75%', top: '91%' }} />
+
+        <pre className="ambient-code left">{`const developer = {
+  name: 'Emerson Santos',
+  mindset: 'arte & código',
+  color: '#0ea5e9'
+};
+
+function create(idea) {
+  return idea.map(build);
+}`}</pre>
+
+        <pre className="ambient-code right">{`<Experience>
+  <Design />
+  <Code />
+  <Human />
+</Experience>
+
+// always learning.
+// always building.`}</pre>
+      </div>
+
+      <span className="desktop-note left" aria-hidden="true">
+        ARTE + CÓDIGO
+      </span>
+      <span className="desktop-note right" aria-hidden="true">
+        MACEIÓ, AL · BRASIL
+      </span>
+    </>
+  );
+}
+
+
+/* --- Arquivo: src/components/Topbar.js --- */
+function Topbar() {
+  const [prefix, suffix] = CONFIG.assinatura.split('.');
+
+  return (
+    <header className="topbar">
+      <a className="signature mono" href="#topo" aria-label="Emerson, início">
+        {prefix}
+        <span>.{suffix}</span>
+      </a>
+      <span className="availability">
+        <span className="status-dot" aria-hidden="true" />
+        DISPONÍVEL PARA PROJETOS
+      </span>
+    </header>
+  );
+}
+
+
+/* --- Arquivo: src/components/SocialBar.js --- */
+function SocialBar() {
+  const socials = [
+    { nome: 'Instagram', icone: 'fa-brands fa-instagram', url: CONFIG.redes.instagram },
+    { nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', url: whatsappURL() },
+    { nome: 'LinkedIn', icone: 'fa-brands fa-linkedin-in', url: CONFIG.redes.linkedin },
+    { nome: 'GitHub', icone: 'fa-brands fa-github', url: CONFIG.redes.github },
+  ];
+
+  return (
+    <nav className="social-bar" aria-label="Conecte-se com Emerson">
+      {socials.map((social) => (
+        <a
+          key={social.nome}
+          className="social-link glass press hover:-translate-y-1"
+          href={safeURL(social.url)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${social.nome} de ${CONFIG.nome}`}
+        >
+          <i className={social.icone} aria-hidden="true" />
+          <span className="tooltip">{social.nome}</span>
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+
+/* --- Arquivo: src/components/HeroSection.js --- */
+function HeroSection({ onOpenBriefing }) {
+  const [photoSrc, setPhotoSrc] = useState(
+    CONFIG.fotoPerfil || CONFIG.fotoPerfilFallback
+  );
+  const [showFallbackMonogram, setShowFallbackMonogram] = useState(false);
+
+  const handleImageError = () => {
+    if (photoSrc !== CONFIG.fotoPerfilFallback && CONFIG.fotoPerfilFallback) {
+      setPhotoSrc(CONFIG.fotoPerfilFallback);
+    } else {
+      setShowFallbackMonogram(true);
+    }
+  };
+
+  return (
+    <section className="hero" aria-labelledby="heroTitle">
+      <div className="hero-art" aria-hidden="true" />
+      <div className="hero-code" aria-hidden="true">
+        const style = &#123;
+        <br />
+        &nbsp; color: &apos;#0ea5e9&apos;
+        <br />
+        &#125;;
+      </div>
+
+      <div className="avatar-wrap">
+        <div className="story-ring">
+          <div className="avatar-inner">
+            {showFallbackMonogram || !photoSrc ? (
+              <div
+                className="avatar-fallback"
+                role="img"
+                aria-label={`Monograma ${CONFIG.iniciais} em tons de terracota e ciano`}
+              >
+                <span>{CONFIG.iniciais}</span>
+              </div>
+            ) : (
+              <img
+                src={photoSrc}
+                alt={`Foto de ${CONFIG.nome}`}
+                width="120"
+                height="120"
+                decoding="async"
+                onError={handleImageError}
+              />
+            )}
+          </div>
+        </div>
+        <span
+          className="verified"
+          title="Identidade de desenvolvedor"
+          aria-label="Selo visual de desenvolvedor"
+        >
+          <i className="fa-solid fa-check" aria-hidden="true" />
+        </span>
+      </div>
+
+      <p className="eyebrow">Entre o humano e o digital</p>
+      <h1 id="heroTitle">
+        {CONFIG.nome}
+        <span>.</span>
+      </h1>
+      <p className="hero-role">{CONFIG.titulo}</p>
+
+      <div className="code-tag">
+        <span className="keyword">const</span> mindset ={' '}
+        <span className="string">&quot;arte, código &amp; solução&quot;</span>;
+      </div>
+
+      <p className="hero-bio">{CONFIG.bio}</p>
+
+      <p className="location">
+        <span className="icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            aria-hidden="true"
+          >
+            <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+        </span>
+        <span>{CONFIG.localizacao}</span>
+        <span className="separator">↗</span> Todo o Brasil
+      </p>
+
+      <SocialBar />
+
+      <button
+        type="button"
+        className="button button-primary press hero-cta active:translate-x-[3px] active:translate-y-[3px]"
+        onClick={onOpenBriefing}
+      >
+        <i className="fa-regular fa-comment-dots" aria-hidden="true" />
+        Vamos construir sua próxima ideia?
+        <span aria-hidden="true">↗</span>
+      </button>
+
+      <nav className="section-nav" aria-label="Seções do portfólio">
+        <a href="#stack">
+          <span>01</span> Stack
+        </a>
+        <a href="#projetos">
+          <span>02</span> Projetos
+        </a>
+        <a href="#gxcodev">
+          <span>03</span> Gxcodev
+        </a>
+      </nav>
+    </section>
+  );
+}
+
+
+/* --- Arquivo: src/components/StackSection.js --- */
+function StackSection() {
+  return (
+    <section className="section" id="stack" aria-labelledby="stackTitle">
+      <p className="section-heading">01 / STACK &amp; APRENDIZADO</p>
+      <h2 id="stackTitle">
+        Repertório Full Stack
+        <br />
+        em constante evolução<span className="sky">.</span>
+      </h2>
+      <p className="section-intro">
+        Da primeira linha de código à experiência de quem usa. Um aprendizado de cada vez.
+      </p>
+
+      <div className="skill-list">
+        {CONFIG.SKILLS.map((skill, index) => (
+          <details
+            key={skill.titulo}
+            className="skill-card glass"
+            open={index === 0}
+          >
+            <summary>
+              <span className="skill-symbol">
+                <i className={skill.icone} aria-hidden="true" />
+              </span>
+              <div className="skill-summary">
+                <h3>{skill.titulo}</h3>
+                <p>{skill.foco}</p>
+              </div>
+              <i
+                className="fa-solid fa-chevron-down skill-chevron"
+                aria-hidden="true"
+              />
+            </summary>
+
+            <div className="skill-body">
+              <p>{skill.descricao}</p>
+              <div className="tech-tags">
+                {skill.tecnologias.map((tech) => (
+                  <span key={tech.nome} className="tech-tag">
+                    {tech.icone && <i className={tech.icone} aria-hidden="true" />}
+                    {tech.nome}
+                  </span>
+                ))}
+              </div>
+              <p className="learning-line">
+                Em Aprendizado contínuo • aplicação prática
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+/* --- Arquivo: src/components/ProjectPreview.js --- */
+function ProjectArtwork({ type }) {
+  const sidebar = (
+    <aside className="mini-sidebar">
+      <span className="mini-logo">x</span>
+      <b />
+      <b />
+      <b />
+      <b />
+    </aside>
+  );
+
+  const renderStats = (values, labels) => (
+    <div className="mini-stats">
+      {values.map((value, i) => (
+        <div key={labels[i]} className="mini-stat">
+          <small>{labels[i]}</small>
+          <strong>{value}</strong>
+        </div>
+      ))}
+    </div>
+  );
+
+  if (type === 'financas') {
+    return (
+      <div className="mini-ui mini-finance">
+        {sidebar}
+        <div className="mini-content">
+          <div className="mini-top">
+            <span className="mini-title">
+              FinFlow<span className="peach">.</span>
+            </span>
+            <span className="mini-pill">Este mês ↗</span>
+          </div>
+          {renderStats(['R$ 4.850', 'R$ 2.340', '+20%'], ['Receitas', 'Despesas', 'Saldo'])}
+          <div className="mini-chart">
+            {[35, 60, 42, 79, 55, 92, 74, 100].map((height, idx) => (
+              <span key={idx} style={{ height: `${height}%` }} />
+            ))}
+          </div>
+          <div className="mini-chart-labels">
+            <span>SEG</span>
+            <span>QUA</span>
+            <span>SEX</span>
+            <span>DOM</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'studio') {
+    return (
+      <div className="mini-studio">
+        <div className="mini-phone">
+          <div className="mini-phone-logo">GX</div>
+          <h4>Gxcodev.</h4>
+          <small>Design meets code</small>
+          <a href="#gxcodev" tabIndex={-1}>
+            Conheça o estúdio ↗
+          </a>
+          <a href="#projetos" tabIndex={-1}>
+            Projetos &amp; modelos ↗
+          </a>
+          <a href="#gxcodev" tabIndex={-1}>
+            Vamos conversar ↗
+          </a>
+        </div>
+        <div className="mini-annotations">
+          <span>DESIGN + CÓDIGO</span>
+          Sua presença.
+          <br />
+          Sua essência.
+          <br />
+          <b className="sky">Seu próximo passo.</b>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'bot') {
+    return (
+      <div className="mini-bot">
+        <div className="mini-bot-head">
+          <b>↗</b>FluxoBot
+          <span className="mini-pill">fluxo de exemplo</span>
+        </div>
+        <div className="mini-message">
+          Olá! Quero organizar minhas solicitações.
+        </div>
+        <div className="mini-message reply">
+          Vamos encontrar o fluxo ideal. ✓
+        </div>
+        <div className="mini-flow">
+          <span>Receber</span>→<span>Organizar</span>→<span>Encaminhar</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mini-ui">
+      {sidebar}
+      <div className="mini-content">
+        <div className="mini-top">
+          <span className="mini-title">Visão geral das escalas</span>
+          <span className="mini-pill">+ Nova escala</span>
+        </div>
+        {renderStats(['24', '08', '16'], ['Agendas', 'Equipes', 'Atendimentos'])}
+        <div className="mini-lines">
+          {[1, 2, 3].map((row) => (
+            <div key={row} className="mini-row">
+              <span className="mini-avatar" />
+              <b />
+              <em />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function normalizeImageSrc(rawSrc) {
+  if (!rawSrc) return '';
+  const trimmed = String(rawSrc).trim();
+  if (/^(https?:|data:)/i.test(trimmed)) return trimmed;
+  const withoutPublic = trimmed.replace(/^\/?public\//i, '/');
+  return withoutPublic.startsWith('/') ? withoutPublic : `/${withoutPublic}`;
+}
+
+function ProjectPreview({ project }) {
+  const [imageError, setImageError] = useState(false);
+  const imgSrc = normalizeImageSrc(project?.imagem);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [imgSrc]);
+
+  const showCustomImage = Boolean(imgSrc && !imageError);
+
+  return (
+    <div className="project-preview">
+      <div className="window-bar">
+        <span className="window-dot" />
+        <span className="window-dot" />
+        <span className="window-dot" />
+        <span className="window-label">{project.id} / preview</span>
+      </div>
+      <div className="preview-stage">
+        {!showCustomImage && (
+          <div aria-hidden="true">
+            <ProjectArtwork type={project.preview} />
+          </div>
+        )}
+        {showCustomImage && (
+          <img
+            src={imgSrc}
+            alt={`Preview de ${project.titulo}`}
+            decoding="async"
+            onError={() => setImageError(true)}
+          />
+        )}
+        {project.demonstrativo && (
+          <span className="concept-mark">ESTUDO CONCEITUAL</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+/* --- Arquivo: src/components/ProjectsSection.js --- */
+function ProjectsSection({ onOpenProject }) {
+  const [activeFilter, setActiveFilter] = useState('todos');
+
+  const projects = CONFIG.PROJETOS.filter(
+    (project) => activeFilter === 'todos' || project.categoria === activeFilter
+  );
+
+  return (
+    <section className="section" id="projetos" aria-labelledby="projectsTitle">
+      <p className="section-heading">02 / PORTFÓLIO DE PROJETOS</p>
+      <div className="project-heading">
+        <h2 id="projectsTitle">
+          Projetos &amp;
+          <br />
+          Estudos Práticos<span className="peach">.</span>
+        </h2>
+        <span className="project-count" role="status" aria-live="polite">
+          {String(projects.length).padStart(2, '0')}{' '}
+          {projects.length === 1 ? 'projeto' : 'projetos'}
+        </span>
+      </div>
+
+      <p className="section-intro">
+        Ideias que ganham interface, lógica e propósito.
+      </p>
+
+      <div className="filters" role="group" aria-label="Filtrar projetos">
+        {CONFIG.FILTROS.map((filter) => (
+          <button
+            key={filter.id}
+            type="button"
+            className="filter press"
+            aria-pressed={filter.id === activeFilter}
+            onClick={() => setActiveFilter(filter.id)}
+          >
+            {filter.nome}
+          </button>
+        ))}
+      </div>
+
+      <div className="project-grid">
+        {projects.length > 0 ? (
+          projects.map((project, index) => {
+            const github =
+              safeURL(project.githubUrl) || safeURL(CONFIG.redes.github);
+            return (
+              <article
+                key={project.id}
+                className="project-card glass"
+                style={{ animationDelay: `${index * 35}ms` }}
+              >
+                <ProjectPreview project={project} />
+                <div className="project-body">
+                  <span className="stack-badge">{project.stack}</span>
+                  <h3 className="project-title">{project.titulo}</h3>
+                  <p className="project-description">{project.descricao}</p>
+                  <div className="project-actions">
+                    <a
+                      className="button button-secondary press active:translate-x-[3px] active:translate-y-[3px]"
+                      href={github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Ver ${project.titulo} no GitHub`}
+                    >
+                      <i className="fa-brands fa-github" aria-hidden="true" />
+                      Ver no GitHub <span aria-hidden="true">↗</span>
+                    </a>
+                    <button
+                      type="button"
+                      className="detail-button press"
+                      onClick={() => onOpenProject(project)}
+                      aria-label={`Demo ou detalhes de ${project.titulo}`}
+                    >
+                      Demo / Detalhes
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        ) : (
+          <p className="section-intro">Novos projetos por aqui em breve.</p>
+        )}
+      </div>
+
+      <p className="project-note">
+        <span className="icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v6m0-10v1" />
+          </svg>
+        </span>
+        Conceitos e estudos • explorando possibilidades.
+      </p>
+    </section>
+  );
+}
+
+
+/* --- Arquivo: src/components/StudioSection.js --- */
+function StudioSection({ onOpenBriefing }) {
+  const handleStudioAccess = () => {
+    const url = safeURL(CONFIG.gxcodevUrl);
+    if (url) {
+      window.location.assign(url);
+    } else {
+      onOpenBriefing();
+    }
+  };
+
+  return (
+    <section className="studio-section" id="gxcodev" aria-labelledby="studioTitle">
+      <p className="section-heading">03 / DO CONCEITO À CRIAÇÃO</p>
+      <div className="studio-frame">
+        <div className="studio-card">
+          <div className="studio-grid" aria-hidden="true" />
+          <p className="studio-badge">
+            <i className="fa-solid fa-bolt" aria-hidden="true" />
+            ESTÚDIO DIGITAL &amp; CRIAÇÕES
+          </p>
+
+          <div className="studio-brand">
+            <h2 className="studio-wordmark" id="studioTitle">
+              Gx<span>codev</span>
+            </h2>
+            <span className="studio-logo" aria-hidden="true">
+              &lt;/&gt;
+            </span>
+          </div>
+
+          <p className="studio-motto">
+            Design que conecta.
+            <br />
+            <span>Código que transforma.</span>
+          </p>
+
+          <p className="brand-meaning">
+            <strong>G</strong> Garotinho · <strong>X</strong> Inovação
+            <br />
+            <strong>Code</strong> Códigos · <strong>Dev</strong> Desenvolvedor
+          </p>
+
+          <div className="studio-pillars">
+            <div className="pillar">
+              <span className="pillar-icon">
+                <i className="fa-solid fa-code" aria-hidden="true" />
+              </span>
+              <div>
+                <h3>Serviços que dão forma à sua ideia</h3>
+                <p>
+                  Desenvolvimento Web Full Stack, Mini Sites (Link-in-Bio),
+                  Landing Pages de Alta Conversão, Sistemas/Dashboards, UI/UX
+                  Design (Figma) e ChatBots/Automações para WhatsApp.
+                </p>
+              </div>
+            </div>
+
+            <div className="pillar">
+              <span className="pillar-icon">
+                <i className="fa-solid fa-layer-group" aria-hidden="true" />
+              </span>
+              <div>
+                <h3>Portfólio &amp; Modelos</h3>
+                <p>
+                  Vitrine de templates prontos e soluções sob medida para
+                  negócios, clínicas e profissionais.
+                </p>
+              </div>
+            </div>
+
+            <div className="pillar">
+              <span className="pillar-icon">
+                <i className="fa-regular fa-comments" aria-hidden="true" />
+              </span>
+              <div>
+                <h3>Contato rápido, conversa de verdade</h3>
+                <p>
+                  Orçamentos ágeis e atendimento personalizado em Maceió-AL e
+                  para todo o Brasil.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="button button-primary press full studio-cta active:translate-x-[3px] active:translate-y-[3px]"
+            onClick={handleStudioAccess}
+          >
+            Acessar Gxcodev — Serviços &amp; Portfólio{' '}
+            <span aria-hidden="true">↗</span>
+          </button>
+
+          <a
+            className="button button-quiet press full studio-whatsapp"
+            href={whatsappURL(CONFIG.mensagens.orcamento)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fa-brands fa-whatsapp" aria-hidden="true" />
+            Solicitar Orçamento no WhatsApp
+          </a>
+
+          <a
+            className="studio-instagram"
+            href={safeURL(CONFIG.redes.instagram) || '#gxcodev'}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fa-brands fa-instagram" aria-hidden="true" />
+            {CONFIG.instagramHandle} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+/* --- Arquivo: src/components/Footer.js --- */
+function Footer({ onShowToast, onOpenCopyModal }) {
+  const handleShare = async () => {
+    const url = publicPortfolioURL();
+    if (!url) {
+      onShowToast('Publique o portfólio para compartilhar o link.');
+      return;
+    }
+
+    const data = {
+      title: `${CONFIG.nome} | Portfólio`,
+      text: 'Arte, código & solução. Conheça meu portfólio!',
+      url,
+    };
+
+    if (navigator.share && (!navigator.canShare || navigator.canShare(data))) {
+      try {
+        await navigator.share(data);
+        return;
+      } catch (error) {
+        if (error.name === 'AbortError') return;
+      }
+    }
+
+    let copied = false;
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(url);
+        copied = true;
+      } catch {
+        copied = false;
+      }
+    }
+    if (!copied) {
+      copied = manualCopyText(url);
+    }
+
+    if (copied) {
+      onShowToast('Link copiado!');
+    } else {
+      onOpenCopyModal(url);
+    }
+  };
+
+  const handleSaveVCard = () => {
+    downloadVCardFile();
+    onShowToast('Contato preparado! Abra o arquivo .vcf para salvar.');
+  };
+
+  return (
+    <footer className="footer">
+      <p className="footer-top">Sempre aprendendo. Sempre criando.</p>
+
+      <div className="footer-actions">
+        <button
+          type="button"
+          className="button button-quiet press"
+          onClick={handleShare}
+        >
+          <span className="icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              aria-hidden="true"
+            >
+              <path d="M12 16V3m-5 5 5-5 5 5M5 13v7h14v-7" />
+            </svg>
+          </span>
+          Compartilhar Portfólio
+        </button>
+
+        <button
+          type="button"
+          className="button button-quiet press"
+          onClick={handleSaveVCard}
+        >
+          <span className="icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              aria-hidden="true"
+            >
+              <rect x="4" y="3" width="16" height="18" rx="2" />
+              <circle cx="12" cy="9" r="2.5" />
+              <path d="M8 17c0-4 8-4 8 0M2 7h3m-3 5h3m-3 5h3" />
+            </svg>
+          </span>
+          Salvar Contato <span className="sr-only">vCard .vcf</span>
+        </button>
+      </div>
+
+      <p className="footer-signature">
+        © {CONFIG.ano} <strong>{CONFIG.nome}</strong>
+        <br />
+        Desenvolvido por <strong>{CONFIG.empresa}</strong> •{' '}
+        {CONFIG.localizacao.replace(', ', ' - ')}
+      </p>
+      <p className="footer-cnpj">CNPJ {CONFIG.cnpj}</p>
+      <a className="back-top" href="#topo">
+        Voltar ao topo <span aria-hidden="true">↑</span>
+      </a>
+    </footer>
+  );
+}
+
+
+/* --- Arquivo: src/components/FloatingElements.js --- */
+function FloatingElements({ toastMessage }) {
+  return (
+    <>
+      <a
+        id="whatsappFab"
+        className="fab press fixed bottom-5 right-5 z-50"
+        href={whatsappURL()}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Conversar com Emerson no WhatsApp"
+      >
+        <i className="fa-brands fa-whatsapp" aria-hidden="true" />
+        <span className="tooltip">Vamos conversar?</span>
+      </a>
+
+      <div
+        className={`toast ${toastMessage ? 'visible' : ''}`}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span className="icon" aria-hidden="true">
+          ✓
+        </span>
+        <span>{toastMessage}</span>
+      </div>
+    </>
+  );
+}
+
+
+/* --- Arquivo: src/components/modals/ProjectModal.js --- */
+function ProjectModal({
+  project,
+  onClose,
+  onRequestBudgetWithProject,
+}) {
+  useEffect(() => {
+    if (!project) return undefined;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [project, onClose]);
+
+  if (!project) return null;
+
+  const demo = safeURL(project.demoUrl);
+  const github = safeURL(project.githubUrl) || safeURL(CONFIG.redes.github);
+
+  return (
+    <div
+      className="modal-backdrop-overlay"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <dialog
+        open
+        className="modal react-modal-open"
+        aria-labelledby="projectModalTitle"
+        aria-modal="true"
+      >
+        <div className="modal-inner">
+          <div className="modal-header">
+            <div>
+              <p className="modal-eyebrow">POR DENTRO DO PROJETO</p>
+              <h2 id="projectModalTitle">{project.titulo}</h2>
+            </div>
+            <button
+              type="button"
+              className="close-modal"
+              onClick={onClose}
+              aria-label="Fechar detalhes"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div>
+            <div className="modal-preview">
+              <ProjectPreview project={project} />
+            </div>
+
+            <div className="tech-tags modal-stack">
+              {project.stack.split('•').map((tech) => (
+                <span key={tech.trim()} className="tech-tag">
+                  {tech.trim()}
+                </span>
+              ))}
+            </div>
+
+            <p className="modal-text">
+              {project.detalhes || project.descricao}
+            </p>
+
+            <ul className="modal-points">
+              {(project.destaques || []).map((item) => (
+                <li key={item}>
+                  <span className="icon" aria-hidden="true">
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {project.demonstrativo && (
+              <p className="modal-disclaimer">
+                Estudo conceitual com preview ilustrativo. Explore mais
+                trabalhos e atualizações no GitHub.
+              </p>
+            )}
+
+            <div className="modal-actions">
+              <a
+                className="button button-primary press full"
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fa-brands fa-github" aria-hidden="true" />
+                Ver no GitHub <span aria-hidden="true">↗</span>
+              </a>
+
+              {demo && (
+                <a
+                  className="button button-secondary press full"
+                  href={demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Abrir demonstração <span aria-hidden="true">↗</span>
+                </a>
+              )}
+
+              <button
+                type="button"
+                className="button button-quiet press full"
+                onClick={() => onRequestBudgetWithProject(project)}
+              >
+                Quero uma solução assim <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  );
+}
+
+
+/* --- Arquivo: src/components/modals/BriefingModal.js --- */
+function BriefingModal({
+  isOpen,
+  initialIdea = '',
+  onClose,
+}) {
+  const [name, setName] = useState('');
+  const [service, setService] = useState('');
+  const [idea, setIdea] = useState('');
+
+  useEffect(() => {
+    if (initialIdea) {
+      setIdea(initialIdea);
+    }
+  }, [initialIdea]);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const trimmedName = name.trim();
+    if (!trimmedName) return;
+
+    const selectedService = service || CONFIG.servicos[0];
+    const trimmedIdea = idea.trim();
+    const message = `Olá Emerson! Meu nome é ${trimmedName}. Conheci seu portfólio e gostaria de conversar sobre ${selectedService}.${
+      trimmedIdea ? `\n\nMinha ideia: ${trimmedIdea}` : ''
+    }\n\nPodemos conversar sobre o projeto?`;
+
+    window.location.assign(whatsappURL(message));
+  };
+
+  return (
+    <div
+      className="modal-backdrop-overlay"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <dialog
+        open
+        className="modal react-modal-open"
+        aria-labelledby="briefingTitle"
+        aria-modal="true"
+      >
+        <div className="modal-inner">
+          <div className="modal-header">
+            <div>
+              <p className="modal-eyebrow">GXCODEV / VAMOS CRIAR</p>
+              <h2 id="briefingTitle">
+                Sua ideia começa
+                <br />
+                com uma conversa<span className="sky">.</span>
+              </h2>
+            </div>
+            <button
+              type="button"
+              className="close-modal"
+              onClick={onClose}
+              aria-label="Fechar briefing"
+            >
+              ✕
+            </button>
+          </div>
+
+          <p className="form-intro">
+            Conte um pouco do que você precisa. Vou preparar uma mensagem para
+            continuarmos no WhatsApp.
+          </p>
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-field">
+              <label htmlFor="briefingName">
+                Como posso te chamar? <span className="form-required">*</span>
+              </label>
+              <input
+                id="briefingName"
+                name="nome"
+                autoComplete="given-name"
+                placeholder="Seu nome"
+                maxLength={80}
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="briefingService">
+                O que vamos criar? <span className="form-required">*</span>
+              </label>
+              <select
+                id="briefingService"
+                name="servico"
+                required
+                value={service}
+                onChange={(e) => setService(e.target.value)}
+              >
+                <option value="" disabled>
+                  Selecione um serviço
+                </option>
+                {CONFIG.servicos.map((srv) => (
+                  <option key={srv} value={srv}>
+                    {srv}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="briefingIdea">
+                Me conta sua ideia <span className="muted">(opcional)</span>
+              </label>
+              <textarea
+                id="briefingIdea"
+                name="ideia"
+                placeholder="Seu negócio, seu desafio ou a solução que você imagina…"
+                maxLength={1200}
+                rows={3}
+                value={idea}
+                onChange={(e) => setIdea(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="button button-primary press full briefing-submit"
+            >
+              <i className="fa-brands fa-whatsapp" aria-hidden="true" />
+              Continuar no WhatsApp <span aria-hidden="true">↗</span>
+            </button>
+
+            <p className="form-help">
+              Você revisa e envia a mensagem no WhatsApp. Os dados deste
+              formulário não são armazenados por esta página.
+            </p>
+          </form>
+        </div>
+      </dialog>
+    </div>
+  );
+}
+
+
+/* --- Arquivo: src/components/modals/CopyLinkModal.js --- */
+function CopyLinkModal({ url, onClose }) {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (!url) return undefined;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [url, onClose]);
+
+  if (!url) return null;
+
+  const handleSelectLink = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+      inputRef.current.setSelectionRange(0, url.length);
+    }
+  };
+
+  return (
+    <div
+      className="modal-backdrop-overlay"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <dialog
+        open
+        className="modal react-modal-open"
+        aria-labelledby="copyTitle"
+        aria-modal="true"
+      >
+        <div className="modal-inner">
+          <div className="modal-header">
+            <div>
+              <p className="modal-eyebrow">COMPARTILHAR</p>
+              <h2 id="copyTitle">
+                Leve esse link com você<span className="sky">.</span>
+              </h2>
+            </div>
+            <button
+              type="button"
+              className="close-modal"
+              onClick={onClose}
+              aria-label="Fechar compartilhamento"
+            >
+              ✕
+            </button>
+          </div>
+
+          <p className="form-intro">
+            Selecione e copie o endereço abaixo para compartilhar.
+          </p>
+          <label className="sr-only" htmlFor="copyLink">
+            Endereço do portfólio
+          </label>
+          <input
+            ref={inputRef}
+            className="copy-link-field"
+            id="copyLink"
+            value={url}
+            readOnly
+          />
+          <button
+            type="button"
+            className="button button-secondary full"
+            style={{ marginTop: '14px' }}
+            onClick={handleSelectLink}
+          >
+            Selecionar link
+          </button>
+        </div>
+      </dialog>
+    </div>
+  );
+}
+
+
+/* --- Arquivo: src/App.js --- */
+function App() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [briefingOpen, setBriefingOpen] = useState(false);
+  const [briefingIdea, setBriefingIdea] = useState('');
+  const [copyModalUrl, setCopyModalUrl] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
+  const toastTimerRef = useRef(null);
+
+  useEffect(() => {
+    document.title = `${CONFIG.nome} — Arte, código & solução`;
+    return () => {
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    const anyModalOpen = Boolean(selectedProject || briefingOpen || copyModalUrl);
+    document.documentElement.style.overflow = anyModalOpen ? 'hidden' : '';
+    document.body.style.overflow = anyModalOpen ? 'hidden' : '';
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, [selectedProject, briefingOpen, copyModalUrl]);
+
+  const showToast = (message) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setToastMessage(message);
+    toastTimerRef.current = setTimeout(() => {
+      setToastMessage('');
+    }, 3400);
+  };
+
+  const handleRequestBudgetWithProject = (project) => {
+    setSelectedProject(null);
+    if (project) {
+      setBriefingIdea(
+        `Gostaria de uma solução inspirada no projeto ${project.titulo}.`
+      );
+    }
+    setBriefingOpen(true);
+  };
+
+  return (
+    <>
+      <AmbientBackground />
+
+      <div className="portfolio max-w-[460px] mx-auto" id="topo">
+        <div className="container px-4">
+          <Topbar />
+
+          <main id="conteudo">
+            <HeroSection onOpenBriefing={() => setBriefingOpen(true)} />
+            <StackSection />
+            <ProjectsSection onOpenProject={setSelectedProject} />
+            <StudioSection onOpenBriefing={() => setBriefingOpen(true)} />
+          </main>
+
+          <Footer
+            onShowToast={showToast}
+            onOpenCopyModal={(url) => setCopyModalUrl(url)}
+          />
+        </div>
+      </div>
+
+      <FloatingElements toastMessage={toastMessage} />
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+        onRequestBudgetWithProject={handleRequestBudgetWithProject}
+      />
+
+      <BriefingModal
+        isOpen={briefingOpen}
+        initialIdea={briefingIdea}
+        onClose={() => setBriefingOpen(false)}
+      />
+
+      <CopyLinkModal
+        url={copyModalUrl}
+        onClose={() => setCopyModalUrl('')}
+      />
+    </>
+  );
+}
+
+
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<App />);
+}
+
+  </script>
 </body>
 </html>

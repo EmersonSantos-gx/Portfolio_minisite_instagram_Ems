@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function ProjectArtwork({ type }) {
   const sidebar = (
@@ -122,9 +122,23 @@ function ProjectArtwork({ type }) {
   );
 }
 
+function normalizeImageSrc(rawSrc) {
+  if (!rawSrc) return '';
+  const trimmed = String(rawSrc).trim();
+  if (/^(https?:|data:)/i.test(trimmed)) return trimmed;
+  const withoutPublic = trimmed.replace(/^\/?public\//i, '/');
+  return withoutPublic.startsWith('/') ? withoutPublic : `/${withoutPublic}`;
+}
+
 export default function ProjectPreview({ project }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const imgSrc = normalizeImageSrc(project?.imagem);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [imgSrc]);
+
+  const showCustomImage = Boolean(imgSrc && !imageError);
 
   return (
     <div className="project-preview">
@@ -135,21 +149,16 @@ export default function ProjectPreview({ project }) {
         <span className="window-label">{project.id} / preview</span>
       </div>
       <div className="preview-stage">
-        {!imageLoaded && (
+        {!showCustomImage && (
           <div aria-hidden="true">
             <ProjectArtwork type={project.preview} />
           </div>
         )}
-        {project.imagem && !imageError && (
+        {showCustomImage && (
           <img
-            src={project.imagem}
+            src={imgSrc}
             alt={`Preview de ${project.titulo}`}
-            loading="lazy"
             decoding="async"
-            hidden={!imageLoaded}
-            onLoad={(e) => {
-              if (e.currentTarget.naturalWidth > 0) setImageLoaded(true);
-            }}
             onError={() => setImageError(true)}
           />
         )}
